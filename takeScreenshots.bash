@@ -1,18 +1,21 @@
 #/bin/bash
 
+# git reset --hard [hash]
+
 # for each line in git log
-LINES=`git log --pretty=oneline`
-NUM_LINES=`echo "$LINES" | wc -l`
+lines=`git log --pretty=oneline`
 
-echo $NUM_LINES
-exit
+counter=1
 
-for i in `seq 1 3`;
-do
+while read -r line; do
+  git reset --hard ${line:0:40}
   pkill "Chrome"
   sleep 1
   open -a "/Applications/Google Chrome.app" "http://localhost:8000"
   sleep 10
-  screencapture "picture"$i".jpg"
+  screencapture "picture"$counter".jpg"
   sleep 1
-done
+  counter=$[$counter +1]
+done <<< "$lines"
+
+
