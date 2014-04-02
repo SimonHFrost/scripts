@@ -12,7 +12,7 @@ while read -r line; do
   pkill "Chrome"
   sleep 1
   open -a "/Applications/Google Chrome.app" "http://localhost:8000"
-  sleep 10
+  sleep 5
   screencapture "picture"$counter".jpg"
   sleep 1
   counter=$[$counter +1]
